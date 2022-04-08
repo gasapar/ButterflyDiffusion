@@ -10,7 +10,11 @@ arguments
         = 1e4:1e4:1e5
     args.StartPosition = []
     args.UseGPU (1, 1) logical = ~isempty(gpuDevice)
+    args.Verbosity = true
 end
+
+
+disp = @(str) MyDisp(args.Verbosity, str);
 
 if isempty(H)
     H = ceil(6*log(10)/log(numel(mask)));
@@ -126,4 +130,12 @@ end
 
 % day
 dur_str = (sec_count /60 /60 /24) + " day";
+end
+
+
+function MyDisp(verbosity, str)
+
+if verbosity
+    disp(str)
+end
 end
